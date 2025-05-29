@@ -1,0 +1,29 @@
+{
+    "manifest_version": 3,
+    "name": "ClickStop - Stop Compulsive Browsing",
+    "author": "Sujal Gupta",
+    "version": "0.0.1",
+    "description": "A browser extension that helps you break compulsive browsing habits by adding mindful friction to link-clicking behavior.",
+    "content_scripts": [
+        {
+            "js": [
+                "scripts/content.js"
+            ],
+            "css": ["styles.css"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "icons": {
+        "16": "images/icon16.png",
+        "32": "images/icon32.png",
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "ClickStop - Stop Compulsive Browsing"
+    },
+    "permissions": [
+        "activeTab", "scripting"
+    ]
+}
