@@ -3,7 +3,7 @@
   display: inline-block;
 }
 
-.cs__anchor .cs__tooltiptext {
+.cs__tooltiptext {
   font-size: 14px;
   font-weight: 400;
   visibility: hidden;
@@ -12,18 +12,19 @@
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 90%;
-  left: 50%;
-  margin-left: -60px;
+  padding: 5px 8px;
+  position: fixed;
+  z-index: 2147483647;
   opacity: 0;
   transition: opacity 0.3s;
   outline: none;
+  display: none;
+  pointer-events: auto;
+  transform: translateZ(0);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-.cs__anchor .cs__tooltiptext::after {
+.cs__anchor .cs__tooltiptext::before {
   content: "";
   position: absolute;
   top: 100%;
@@ -34,10 +35,10 @@
   border-color: #555 transparent transparent transparent;
 }
 
-.cs__anchor:hover .cs__tooltiptext {
-
-  visibility: visible;
-  opacity: 1;
+.cs__tooltiptext.visible {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
 }
 .cs__tooltiptext:hover {
   cursor: pointer;

@@ -124,6 +124,7 @@ function handleAnchor(anchor) {
 
     anchor.addEventListener('click', (event) => {
         event.preventDefault();
+        event.stopPropagation();
     });
     
     anchor.classList.add('cs__anchor');
@@ -131,6 +132,12 @@ function handleAnchor(anchor) {
     clickToCopyBtn.textContent = getRandomPrompt();
     clickToCopyBtn.classList.add('cs__tooltiptext');
     
+    function updateTooltipPosition() {
+        const rect = anchor.getBoundingClientRect();
+        clickToCopyBtn.style.top = `${rect.top - clickToCopyBtn.offsetHeight - 10}px`;
+        clickToCopyBtn.style.left = `${rect.left + (rect.width / 2) - (clickToCopyBtn.offsetWidth / 2)}px`;
+    }
+
     clickToCopyBtn.addEventListener('click', async () => {
         if(window.navigator.clipboard){
             await window.navigator.clipboard.writeText(anchor.href);
@@ -139,7 +146,26 @@ function handleAnchor(anchor) {
         }
     });
     
-    anchor.appendChild(clickToCopyBtn);
+    // Add to body instead of anchor
+    document.body.appendChild(clickToCopyBtn);
+    
+    // Show/hide tooltip
+    anchor.addEventListener('mouseenter', () => {
+        clickToCopyBtn.style.display = 'block';
+        clickToCopyBtn.style.visibility = 'visible';
+        clickToCopyBtn.style.opacity = '1';
+        updateTooltipPosition();
+    });
+    
+    anchor.addEventListener('mouseleave', () => {
+        clickToCopyBtn.style.display = 'none';
+        clickToCopyBtn.style.visibility = 'hidden';
+        clickToCopyBtn.style.opacity = '0';
+    });
+    
+    // Update position on scroll and resize
+    window.addEventListener('scroll', updateTooltipPosition);
+    window.addEventListener('resize', updateTooltipPosition);
 }
 
 function init(){
