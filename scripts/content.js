@@ -132,10 +132,29 @@ function handleAnchor(anchor) {
     clickToCopyBtn.textContent = getRandomPrompt();
     clickToCopyBtn.classList.add('cs__tooltiptext');
     
+    let hideTimeout;
+
     function updateTooltipPosition() {
         const rect = anchor.getBoundingClientRect();
-        clickToCopyBtn.style.top = `${rect.top - clickToCopyBtn.offsetHeight - 10}px`;
+        // Position tooltip just 5px above the link
+        clickToCopyBtn.style.top = `${rect.top - clickToCopyBtn.offsetHeight - 3}px`;
         clickToCopyBtn.style.left = `${rect.left + (rect.width / 2) - (clickToCopyBtn.offsetWidth / 2)}px`;
+    }
+
+    function showTooltip() {
+        clearTimeout(hideTimeout);
+        clickToCopyBtn.style.display = 'block';
+        clickToCopyBtn.style.visibility = 'visible';
+        clickToCopyBtn.style.opacity = '1';
+        updateTooltipPosition();
+    }
+
+    function hideTooltip() {
+        hideTimeout = setTimeout(() => {
+            clickToCopyBtn.style.display = 'none';
+            clickToCopyBtn.style.visibility = 'hidden';
+            clickToCopyBtn.style.opacity = '0';
+        }, 100);
     }
 
     clickToCopyBtn.addEventListener('click', async () => {
@@ -150,18 +169,12 @@ function handleAnchor(anchor) {
     document.body.appendChild(clickToCopyBtn);
     
     // Show/hide tooltip
-    anchor.addEventListener('mouseenter', () => {
-        clickToCopyBtn.style.display = 'block';
-        clickToCopyBtn.style.visibility = 'visible';
-        clickToCopyBtn.style.opacity = '1';
-        updateTooltipPosition();
-    });
+    anchor.addEventListener('mouseenter', showTooltip);
+    anchor.addEventListener('mouseleave', hideTooltip);
     
-    anchor.addEventListener('mouseleave', () => {
-        clickToCopyBtn.style.display = 'none';
-        clickToCopyBtn.style.visibility = 'hidden';
-        clickToCopyBtn.style.opacity = '0';
-    });
+    // Keep tooltip visible when hovering over it
+    clickToCopyBtn.addEventListener('mouseenter', showTooltip);
+    clickToCopyBtn.addEventListener('mouseleave', hideTooltip);
     
     // Update position on scroll and resize
     window.addEventListener('scroll', updateTooltipPosition);
