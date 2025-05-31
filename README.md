@@ -2,7 +2,9 @@
 
 A simple chrome extension made for self use which adds a friction to control the habit of digging down the rabbit hole and mindless browsing by adding a little friction to navigating process and some mindful cues.
 
-![working-screenshot](profile-extension-screenshot.png)
+## Preview
+
+![preview](preview.png)
 
 
 ## How to use?
@@ -14,4 +16,4 @@ A simple chrome extension made for self use which adds a friction to control the
 
 2. Go to `chrome://extensions/` or similar for your browser.
 
-3. Select `Load Unpacked'
+3. Select `Load Unpacked` and upload the extracted or cloned repo.
