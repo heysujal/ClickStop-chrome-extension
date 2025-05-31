@@ -16,4 +16,6 @@ A simple chrome extension made for self use which adds a friction to control the
 
 2. Go to `chrome://extensions/` or similar for your browser.
 
-3. Select `Load Unpacked` and upload the extracted or cloned repo.
+3. Select `Load Unpacked` and upload the extracted or cloned repo. Done.
+
+Feel free to report issues or contribute.
