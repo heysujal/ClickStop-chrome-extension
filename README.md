@@ -13,9 +13,13 @@ A simple chrome extension made for self use which adds a friction to control the
 
 ![alt text](download-repo.png)
 
-
 2. Go to `chrome://extensions/` or similar for your browser.
 
 3. Select `Load Unpacked` and upload the extracted or cloned repo. Done.
+
+Future Scope:
+
+- Add feature to enable Click Cooldown.
+
 
 Feel free to report issues or contribute.
